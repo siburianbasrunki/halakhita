@@ -1,112 +1,124 @@
 export const quizData = [
   {
-    question: "Apa nama aksara tradisional yang digunakan oleh masyarakat Batak?",
+    question: "Aksara Batak Toba disebut juga dengan nama lain...",
     answers: [
       { id: "1", text: "Surat Batak" },
-      { id: "2", text: "Hanacaraka" },
-      { id: "3", text: "Kaganga" },
-      { id: "4", text: "Lontara" }
+      { id: "2", text: "Surat Jawa" },
+      { id: "3", text: "Surat Sunda" },
+      { id: "4", text: "Surat Bugis" },
     ],
     correctAnswer: "1",
-    explanation: "Aksara tradisional Batak disebut 'Surat Batak' atau 'Surat na Sampulu Sia' yang berarti 'tulisan yang sembilan belas'."
+    explanation:
+      "Aksara tradisional Batak disebut 'Surat Batak' atau 'Surat na Sampulu Sia' yang berarti 'tulisan yang sembilan belas'.",
   },
   {
-    question: "Apa nama falsafah hidup masyarakat Batak yang berarti 'Tungku Nan Tiga'?",
+    question:
+      "Ada berapa jumlah induk aksara (ina ni surat) dalam Aksara Batak Toba?",
     answers: [
-      { id: "1", text: "Dalihan Na Tolu" },
-      { id: "2", text: "Tiga Serangkai" },
-      { id: "3", text: "Sangkep Telu" },
-      { id: "4", text: "Tri Hita Karana" }
+      { id: "1", text: "15" },
+      { id: "2", text: "19" },
+      { id: "3", text: "22" },
+      { id: "4", text: "25" },
     ],
-    correctAnswer: "1",
-    explanation: "Dalihan Na Tolu adalah filosofi hidup masyarakat Batak yang mengatur hubungan kekerabatan dengan tiga posisi: hula-hula (pemberi marga), dongan tubu (teman semarga), dan boru (penerima marga)."
+    correctAnswer: "2",
+    explanation:
+      "Aksara Batak Toba memiliki 19 induk aksara (ina ni surat) yang menjadi dasar pembentukan kata.",
   },
   {
-    question: "Kain tenun tradisional Batak disebut...",
+    question:
+      "Berikut ini yang termasuk anak aksara (pangolat) yang berfungsi mematikan vokal adalah...",
     answers: [
-      { id: "1", text: "Ulos" },
-      { id: "2", text: "Songket" },
-      { id: "3", text: "Tenun" },
-      { id: "4", text: "Gringsing" }
-    ],
-    correctAnswer: "1",
-    explanation: "Ulos adalah kain tenun tradisional Batak yang memiliki makna mendalam dan digunakan dalam berbagai upacara adat."
-  },
-  {
-    question: "Alat musik tradisional Batak yang berupa gong kecil disebut...",
-    answers: [
-      { id: "1", text: "Taganing" },
-      { id: "2", text: "Gordang" },
-      { id: "3", text: "Ogung" },
-      { id: "4", text: "Sarune" }
+      { id: "1", text: "Ulu" },
+      { id: "2", text: "Haboruan" },
+      { id: "3", text: "Pangolat" },
+      { id: "4", text: "Taring" },
     ],
     correctAnswer: "3",
-    explanation: "Ogung adalah gong kecil yang merupakan bagian penting dalam ensambel musik Gondang Batak."
+    explanation:
+      "Pangolat adalah anak aksara yang digunakan untuk mematikan vokal pada induk aksara, mengubahnya menjadi konsonan murni.",
   },
   {
-    question: "Tarian tradisional Batak yang biasanya dilakukan dalam upacara adat disebut...",
+    question: "Bagaimana penulisan 'ba' dalam Aksara Batak Toba?",
     answers: [
-      { id: "1", text: "Tortor" },
-      { id: "2", text: "Serampang Dua Belas" },
-      { id: "3", text: "Piring" },
-      { id: "4", text: "Payung" }
+      { id: "1", text: "[Gambar aksara 'ba']" }, // Anda perlu menambahkan representasi visual atau deskripsi aksara di sini
+      { id: "2", text: "[Gambar aksara 'ka']" },
+      { id: "3", text: "[Gambar aksara 'da']" },
+      { id: "4", text: "[Gambar aksara 'ga']" },
     ],
     correctAnswer: "1",
-    explanation: "Tortor adalah tarian sakral masyarakat Batak yang diiringi musik gondang dan memiliki makna spiritual."
+    explanation: "Aksara 'ba' memiliki bentuk khas seperti...", // Deskripsikan atau tunjukkan visual di sini
   },
   {
-    question: "Apa nama rumah adat tradisional Batak Toba?",
+    question: "Kata 'Horas' dalam Bahasa Batak Toba berarti...",
     answers: [
-      { id: "1", text: "Rumah Gadang" },
-      { id: "2", text: "Rumah Bolon" },
-      { id: "3", text: "Joglo" },
-      { id: "4", text: "Lamin" }
+      { id: "1", text: "Selamat/Sehat/Halo" },
+      { id: "2", text: "Terima Kasih" },
+      { id: "3", text: "Sampai Jumpa" },
+      { id: "4", text: "Apa Kabar" },
+    ],
+    correctAnswer: "1",
+    explanation:
+      "Kata 'Horas' adalah salam universal dalam Bahasa Batak Toba yang bisa berarti selamat, sehat, atau halo.",
+  },
+  {
+    question: "Apa arti dari frasa 'Mauliate Godang' dalam Bahasa Batak Toba?",
+    answers: [
+      { id: "1", text: "Saya cinta kamu" },
+      { id: "2", text: "Terima kasih banyak" },
+      { id: "3", text: "Apa kabar?" },
+      { id: "4", text: "Selamat pagi" },
     ],
     correctAnswer: "2",
-    explanation: "Rumah Bolon adalah rumah adat Batak Toba dengan arsitektur khas atap melengkung dan ukiran tradisional."
+    explanation:
+      "'Mauliate Godang' adalah ungkapan terima kasih yang sangat sering digunakan dalam Bahasa Batak Toba.",
   },
   {
-    question: "Siapakah yang dianggap sebagai nenek moyang orang Batak dalam mitologi?",
+    question:
+      "Bagaimana cara mengucapkan 'Apa kabarmu?' dalam Bahasa Batak Toba?",
     answers: [
-      { id: "1", text: "Si Raja Batak" },
-      { id: "2", text: "Sisingamangaraja" },
-      { id: "3", text: "Raja Siallagan" },
-      { id: "4", text: "Datu Pejel" }
+      { id: "1", text: "Sadarion" },
+      { id: "2", text: "Borngin on" },
+      { id: "3", text: "Boha Kabarmu?" },
+      { id: "4", text: "Tu dia ho?" },
     ],
-    correctAnswer: "1",
-    explanation: "Menurut legenda, Si Raja Batak adalah nenek moyang orang Batak yang turun dari langit di Pusuk Buhit, tepi Danau Toba."
+    correctAnswer: "3",
+    explanation:
+      "'Aha Kabarmu?' atau 'Boasa ma damang?' adalah cara umum menanyakan kabar dalam Bahasa Batak Toba.",
   },
   {
-    question: "Apa nama upacara kematian dalam adat Batak?",
+    question: "Pangindua (vokal 'u') pada Aksara Batak Toba diletakkan di...",
     answers: [
-      { id: "1", text: "Rambu Solo" },
-      { id: "2", text: "Saur Matua" },
-      { id: "3", text: "Ngaben" },
-      { id: "4", text: "Mangokal Holi" }
-    ],
-    correctAnswer: "4",
-    explanation: "Mangokal Holi adalah upacara penggalian tulang belulang leluhur untuk diberi penghormatan kembali dalam tradisi Batak."
-  },
-  {
-    question: "Apa nama senjata tradisional khas Batak?",
-    answers: [
-      { id: "1", text: "Kujang" },
-      { id: "2", text: "Piso Surit" },
-      { id: "3", text: "Keris" },
-      { id: "4", text: "Mandau" }
+      { id: "1", text: "Atas aksara induk" },
+      { id: "2", text: "Bawah aksara induk" },
+      { id: "3", text: "Samping kiri aksara induk" },
+      { id: "4", text: "Samping kanan aksara induk" },
     ],
     correctAnswer: "2",
-    explanation: "Piso Surit adalah pisau tradisional khas Batak yang sering digunakan dalam upacara adat."
+    explanation:
+      "Anak aksara 'u' atau 'Pangindua' diletakkan di bagian bawah aksara induk.",
   },
   {
-    question: "Danau terbesar di Indonesia yang menjadi pusat wilayah Batak Toba adalah...",
+    question: "Apa arti kata 'Dali' dalam Bahasa Batak Toba?",
     answers: [
-      { id: "1", text: "Danau Toba" },
-      { id: "2", text: "Danau Singkarak" },
-      { id: "3", text: "Danau Maninjau" },
-      { id: "4", text: "Danau Poso" }
+      { id: "1", text: "Batu" },
+      { id: "2", text: "Air" },
+      { id: "3", text: "Susu kerbau (makanan khas)" },
+      { id: "4", text: "Rumah" },
+    ],
+    correctAnswer: "3",
+    explanation:
+      "'Dali ni Horbo' adalah makanan khas Batak Toba yang terbuat dari susu kerbau yang diolah.",
+  },
+  {
+    question: "Frasa 'Molo boi, ro ma ho' berarti...",
+    answers: [
+      { id: "1", text: "Kalau bisa, datanglah kamu" },
+      { id: "2", text: "Saya ingin makan" },
+      { id: "3", text: "Sampai jumpa besok" },
+      { id: "4", text: "Selamat tidur" },
     ],
     correctAnswer: "1",
-    explanation: "Danau Toba adalah danau vulkanik terbesar di dunia yang menjadi jantung wilayah budaya Batak Toba."
-  }
+    explanation:
+      "'Molo boi' berarti 'kalau bisa', dan 'ro ma ho' berarti 'datanglah kamu'.",
+  },
 ];

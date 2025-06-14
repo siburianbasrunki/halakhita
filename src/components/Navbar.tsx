@@ -2,6 +2,7 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BiBook } from "react-icons/bi";
 import { MdOutlineQuiz, MdOutlineWorkHistory } from "react-icons/md";
 import { SiConvertio } from "react-icons/si";
+import { VscSymbolParameter } from "react-icons/vsc";
 import { Link, useLocation } from "react-router-dom";
 
 const Nav = () => {
@@ -55,6 +56,16 @@ const Nav = () => {
         }`}
       >
         <MdOutlineQuiz />
+      </Link>
+      <Link
+        to="/mini-game"
+        className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
+          location.pathname === "/mini-game" 
+            ? "bg-red-600 text-white shadow-md" 
+            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+        }`}
+      >
+        <VscSymbolParameter />
       </Link>
 
       <Link
