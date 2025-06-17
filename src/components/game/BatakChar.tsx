@@ -3,13 +3,21 @@ import { useDrag, useDrop } from "react-dnd";
 import { motion } from "framer-motion";
 import type { BatakCharacterProps } from "../../utils/gameType";
 
-const BatakCharacter = ({ char, matchedLatin, onDrop, disabled }: BatakCharacterProps) => {
+const BatakCharacter = ({ 
+  char, 
+  matchedLatin, 
+  onDrop, 
+  disabled,
+  isHighlighted,
+  onClick,
+  isMobile
+}: BatakCharacterProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, drag] = useDrag({
     type: "BATAK",
     item: { batak: char },
-    canDrag: !disabled,
+    canDrag: !disabled && !isMobile,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -18,13 +26,15 @@ const BatakCharacter = ({ char, matchedLatin, onDrop, disabled }: BatakCharacter
   const [{ isOver }, drop] = useDrop({
     accept: "LATIN",
     drop: (item: { latin: string }) => onDrop(char, item.latin),
-    canDrop: () => !disabled,
+    canDrop: () => !disabled && !isMobile,
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   });
 
-  drag(drop(ref));
+  if (!isMobile) {
+    drag(drop(ref));
+  }
 
   return (
     <motion.div
@@ -32,18 +42,23 @@ const BatakCharacter = ({ char, matchedLatin, onDrop, disabled }: BatakCharacter
       className={`relative flex items-center justify-center h-16 sm:h-20 w-full rounded-lg border-2 transition-all ${
         matchedLatin
           ? "border-green-500 bg-green-500/20"
-          : isOver
+          : isOver || isHighlighted
           ? "border-yellow-500 bg-yellow-500/20"
           : "border-white/30 bg-white/10"
       } ${isDragging ? "opacity-50" : "opacity-100"} ${
-        disabled ? "cursor-not-allowed" : "cursor-move"
+        disabled 
+          ? "cursor-not-allowed" 
+          : isMobile 
+          ? "cursor-pointer" 
+          : "cursor-move"
       }`}
       whileHover={!disabled ? { scale: 1.03 } : {}}
       whileTap={!disabled ? { scale: 0.97 } : {}}
       animate={{
         scale: isDragging ? 0.95 : 1,
-        boxShadow: isOver ? "0 0 10px rgba(234, 179, 8, 0.5)" : "none"
+        boxShadow: (isOver || isHighlighted) ? "0 0 10px rgba(234, 179, 8, 0.5)" : "none"
       }}
+      onClick={isMobile && !disabled ? onClick : undefined}
     >
       <div
         className="text-3xl sm:text-4xl text-white text-center"

@@ -13,6 +13,23 @@ import Background from "../assets/bg.png";
 import LatinCharacter from "../components/game/LatinChar";
 import BatakCharacter from "../components/game/BatakChar";
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkDevice = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  return isMobile;
+};
+
 const MatchingGame = () => {
   const [batakChars, setBatakChars] = useState<CharacterPair[]>([]);
   const [latinChars, setLatinChars] = useState<CharacterPair[]>([]);
@@ -24,6 +41,11 @@ const MatchingGame = () => {
     "waiting" | "playing" | "finished"
   >("waiting");
   const [showTutorial, setShowTutorial] = useState<boolean>(true);
+  
+  const [selectedLatin, setSelectedLatin] = useState<string | null>(null);
+  const [highlightedBatak, setHighlightedBatak] = useState<string | null>(null);
+  
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     initGame();
@@ -61,6 +83,8 @@ const MatchingGame = () => {
     setScore(0);
     setTimeLeft(GAME_DURATION);
     setGameStatus("waiting");
+    setSelectedLatin(null);
+    setHighlightedBatak(null);
   };
 
   const startGame = () => {
@@ -126,6 +150,36 @@ const MatchingGame = () => {
     }
 
     setMatches(newMatches);
+    
+    if (isMobile) {
+      setSelectedLatin(null);
+      setHighlightedBatak(null);
+    }
+  };
+
+  const handleLatinClick = (latinChar: string) => {
+    if (selectedLatin === latinChar) {
+      setSelectedLatin(null); 
+    } else {
+      setSelectedLatin(latinChar);
+      setMessage("Sekarang klik aksara Batak yang sesuai!");
+      setTimeout(() => {
+        if (selectedLatin === latinChar) setMessage("");
+      }, 2000);
+    }
+  };
+
+  const handleBatakClick = (batakChar: string) => {
+    if (selectedLatin) {
+      handleDrop(batakChar, selectedLatin);
+    } else {
+      setMessage("Pilih huruf Latin terlebih dahulu!");
+      setHighlightedBatak(batakChar);
+      setTimeout(() => {
+        setMessage("");
+        setHighlightedBatak(null);
+      }, 1500);
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -241,9 +295,14 @@ const MatchingGame = () => {
           >
             <h3 className="text-yellow-400 font-bold mb-2">Cara Bermain:</h3>
             <ul className="list-disc pl-5 text-white space-y-1 text-sm">
-              <li>
-                Drag dan drop teks Latin ke kotak Aksara Batak yang sesuai
-              </li>
+              {isMobile ? (
+                <>
+                  <li>Klik huruf Latin, lalu klik aksara Batak yang sesuai</li>
+                  <li>Huruf Latin yang dipilih akan ditandai dengan tanda centang</li>
+                </>
+              ) : (
+                <li>Drag dan drop teks Latin ke kotak Aksara Batak yang sesuai</li>
+              )}
               <li>Setiap jawaban benar akan menambah skor</li>
               <li>Jawaban salah akan mengurangi waktu bermain</li>
               <li>
@@ -283,7 +342,7 @@ const MatchingGame = () => {
               {/* Huruf Latin */}
               <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-white mb-4 text-center bg-blue-500/20 py-2 rounded-lg">
-                  Huruf Latin
+                  Huruf Latin {isMobile && selectedLatin && "(Pilih Aksara)"}
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {latinChars.map(({ latin }) => (
@@ -292,6 +351,9 @@ const MatchingGame = () => {
                       char={latin}
                       isMatched={Object.values(matches).includes(latin)}
                       disabled={gameStatus === "finished"}
+                      isSelected={selectedLatin === latin}
+                      onClick={() => handleLatinClick(latin)}
+                      isMobile={isMobile}
                     />
                   ))}
                 </div>
@@ -310,6 +372,9 @@ const MatchingGame = () => {
                       matchedLatin={matches[batak]}
                       onDrop={handleDrop}
                       disabled={gameStatus === "finished"}
+                      isHighlighted={highlightedBatak === batak}
+                      onClick={() => handleBatakClick(batak)}
+                      isMobile={isMobile}
                     />
                   ))}
                 </div>

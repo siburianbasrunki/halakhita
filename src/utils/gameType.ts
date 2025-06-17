@@ -3,17 +3,23 @@ export interface CharacterPair {
   latin: string;
 }
 
-export interface BatakCharacterProps {
-  char: string;
-  matchedLatin?: string;
-  onDrop: (batak: string, latin: string) => void;
-  disabled: boolean;
-}
-
 export interface LatinCharacterProps {
   char: string;
   isMatched: boolean;
   disabled: boolean;
+  isSelected?: boolean;
+  onClick?: () => void;
+  isMobile?: boolean;
+}
+
+export interface BatakCharacterProps {
+  char: string;
+  matchedLatin?: string;
+  onDrop: (batakChar: string, latinChar: string) => void;
+  disabled: boolean;
+  isHighlighted?: boolean;
+  onClick?: () => void;
+  isMobile?: boolean;
 }
 
 export const initialPairs: CharacterPair[] = [
