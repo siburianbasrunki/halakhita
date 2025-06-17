@@ -10,17 +10,18 @@ const Nav = () => {
 
   return (
     <nav
-      className="fixed left-1/2 bottom-8 z-20 flex gap-3 p-3 rounded-full bg-opacity-80 backdrop-blur-lg transform -translate-x-1/2 border border-gray-200/20 shadow-lg"
+      className="fixed left-1/2 bottom-8 z-20 flex gap-3 p-3 rounded-full bg-opacity-80 backdrop-blur-lg transform -translate-x-1/2 border border-yellow-400/30 shadow-lg"
       style={{
-        background: `linear-gradient(135deg, rgba(231, 76, 60, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%)`,
+        background: `linear-gradient(135deg, rgba(234, 179, 8, 0.8) 0%, rgba(249, 115, 22, 0.8) 100%)`,
+        boxShadow: "0 4px 30px rgba(249, 115, 22, 0.3)"
       }}
     >
       <Link
         to="/"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <AiOutlineHome />
@@ -29,8 +30,8 @@ const Nav = () => {
         to="/about"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/about" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <MdOutlineWorkHistory />
@@ -40,8 +41,8 @@ const Nav = () => {
         to="/aksara"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/aksara" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <BiBook />
@@ -51,8 +52,8 @@ const Nav = () => {
         to="/mini-quiz"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/mini-quiz" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <MdOutlineQuiz />
@@ -61,8 +62,8 @@ const Nav = () => {
         to="/mini-game"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/mini-game" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <VscSymbolParameter />
@@ -72,14 +73,12 @@ const Nav = () => {
         to="/convertor"
         className={`p-3 rounded-full flex text-xl transition-all duration-300 ${
           location.pathname === "/convertor" 
-            ? "bg-red-600 text-white shadow-md" 
-            : "text-gray-800 hover:bg-gray-200/70 hover:text-black"
+            ? "bg-yellow-500 text-gray-900 shadow-md" 
+            : "text-gray-900 hover:bg-yellow-400/70 hover:text-gray-900"
         }`}
       >
         <SiConvertio />
       </Link>
-
-      
     </nav>
   );
 };

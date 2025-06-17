@@ -323,7 +323,7 @@ const MatchingGame = () => {
           <div className="text-center mb-8">
             <motion.button
               onClick={startGame}
-              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-lg text-white text-xl font-bold shadow-lg"
+              className="px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 rounded-lg text-white text-xl font-bold shadow-lg"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -381,7 +381,7 @@ const MatchingGame = () => {
               </div>
             </div>
 
-            <div className="mt-8 flex justify-center gap-4">
+            <div className="mt-8 flex justify-center gap-4 mb-[80px]">
               <motion.button
                 onClick={initGame}
                 className="px-6 py-3 bg-yellow-500/80 hover:bg-yellow-500 rounded-lg text-white font-medium shadow-md"
@@ -394,7 +394,7 @@ const MatchingGame = () => {
               {gameStatus === "finished" && (
                 <motion.button
                   onClick={startGame}
-                  className="px-6 py-3 bg-green-500/80 hover:bg-green-500 rounded-lg text-white font-medium shadow-md"
+                  className="px-6 py-3 bg-yellow-500/80 hover:bg-yellow-500 rounded-lg text-white font-medium shadow-md"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
