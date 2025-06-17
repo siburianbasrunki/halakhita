@@ -1,32 +1,17 @@
-import { useState, useEffect, useRef } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { useState, useEffect } from "react";
 import { shuffle } from "lodash";
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  initialPairs,
+  GAME_DURATION,
+  TIME_PENALTY,
+  type CharacterPair,
+} from "../utils/gameType";
+
 import Background from "../assets/bg.png";
-
-interface CharacterPair {
-  batak: string;
-  latin: string;
-}
-
-const initialPairs: CharacterPair[] = [
-  { batak: "ᯂ", latin: "ha" },
-  { batak: "ᯔ", latin: "ma" },
-  { batak: "ᯉ", latin: "na" },
-  { batak: "ᯒ", latin: "ra" },
-  { batak: "ᯖ", latin: "ta" },
-  { batak: "ᯘ", latin: "sa" },
-  { batak: "ᯑ", latin: "da" },
-  { batak: "ᯎ", latin: "ga" },
-  { batak: "ᯐ", latin: "ja" },
-  { batak: "ᯅ", latin: "ba" },
-  { batak: "ᯞ", latin: "la" },
-  { batak: "ᯇ", latin: "pa" },
-  { batak: "ᯤ", latin: "i" },
-  { batak: "ᯥ", latin: "u" },
-];
-
-const GAME_DURATION = 120;
-const TIME_PENALTY = 5;
+import LatinCharacter from "../components/game/LatinChar";
+import BatakCharacter from "../components/game/BatakChar";
 
 const MatchingGame = () => {
   const [batakChars, setBatakChars] = useState<CharacterPair[]>([]);
@@ -38,13 +23,12 @@ const MatchingGame = () => {
   const [gameStatus, setGameStatus] = useState<
     "waiting" | "playing" | "finished"
   >("waiting");
+  const [showTutorial, setShowTutorial] = useState<boolean>(true);
 
-  // Initialize game characters when component mounts
   useEffect(() => {
     initGame();
   }, []);
 
-  // Timer logic
   useEffect(() => {
     let timer: number;
 
@@ -85,6 +69,7 @@ const MatchingGame = () => {
     setLatinChars(shuffle([...shuffled]));
     setGameStatus("playing");
     setMessage("Game dimulai! Cocokkan aksara dengan benar!");
+    setShowTutorial(false);
   };
 
   const applyTimePenalty = () => {
@@ -92,6 +77,7 @@ const MatchingGame = () => {
     setMessage(`Salah! Waktu dikurangi ${TIME_PENALTY} detik`);
     setTimeout(() => setMessage(""), 1500);
   };
+
   const finishGame = () => {
     setGameStatus("finished");
     const correctMatches = Object.entries(matches).filter(
@@ -110,6 +96,7 @@ const MatchingGame = () => {
       setMessage(`Skor Anda: ${finalScore}. Ayo coba lagi!`);
     }
   };
+
   const handleDrop = (droppedBatak: string, droppedLatin: string) => {
     if (gameStatus !== "playing") return;
 
@@ -146,9 +133,10 @@ const MatchingGame = () => {
     const secs = seconds % 60;
     return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
   };
+
   return (
     <div
-      className="relative min-h-screen w-full flex items-center justify-center flex-col py-20 px-4"
+      className="relative min-h-screen w-full flex items-center justify-center flex-col py-10 px-4"
       style={{
         backgroundImage: `url(${Background})`,
         backgroundSize: "cover",
@@ -157,72 +145,164 @@ const MatchingGame = () => {
       }}
     >
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-400/10 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/5 rounded-full animate-ping"></div>
+        <motion.div
+          className="absolute -top-40 -right-40 w-80 h-80 bg-white/5 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-400/10 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2,
+          }}
+        />
       </div>
 
-      <div className="max-w-4xl w-full mx-auto relative z-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white text-center mb-6">
+      <motion.div
+        className="max-w-4xl w-full mx-auto relative z-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-lg"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
           Cocokkan Aksara Batak
-          <br />
-          <span className="text-sm">(sian siamun tu hambirang)</span>
         </h1>
 
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           <div className="text-xl font-semibold text-yellow-400">
             Waktu: {formatTime(timeLeft)}
           </div>
+
           {gameStatus === "playing" && (
-            <div className="text-xl font-semibold text-green-400">
+            <motion.div
+              className="text-xl font-semibold text-green-400"
+              animate={{ scale: [1, 1.1, 1] }}
+              transition={{ duration: 1, repeat: Infinity }}
+            >
               Skor:{" "}
               {Math.floor(
                 (Object.keys(matches).length / initialPairs.length) * 100
               )}
               %
-            </div>
+            </motion.div>
           )}
+
           {gameStatus === "finished" && (
-            <div className="text-xl font-semibold text-green-400">
+            <div
+              className={`text-xl font-semibold ${
+                score >= 70 ? "text-green-400" : "text-yellow-400"
+              }`}
+            >
               Skor Akhir: {score}%
             </div>
           )}
         </div>
 
-        {message && (
-          <div
-            className={`p-4 mb-6 rounded-lg text-center ${
-              message.includes("Benar") ||
-              message.includes("Sempurna") ||
-              message.includes("Bagus")
-                ? "bg-green-500/20 text-green-300"
-                : "bg-red-500/20 text-red-300"
-            }`}
+        <AnimatePresence>
+          {message && (
+            <motion.div
+              className={`p-4 mb-6 rounded-lg text-center ${
+                message.includes("Benar") ||
+                message.includes("Sempurna") ||
+                message.includes("Bagus")
+                  ? "bg-green-500/20 text-green-300"
+                  : "bg-red-500/20 text-red-300"
+              }`}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {message}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {showTutorial && (
+          <motion.div
+            className="bg-blue-500/20 border border-blue-400/30 rounded-lg p-4 mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            {message}
-          </div>
+            <h3 className="text-yellow-400 font-bold mb-2">Cara Bermain:</h3>
+            <ul className="list-disc pl-5 text-white space-y-1 text-sm">
+              <li>
+                Drag dan drop teks Latin ke kotak Aksara Batak yang sesuai
+              </li>
+              <li>Setiap jawaban benar akan menambah skor</li>
+              <li>Jawaban salah akan mengurangi waktu bermain</li>
+              <li>
+                Selesaikan sebelum waktu habis untuk mendapatkan skor tertinggi
+              </li>
+            </ul>
+            <div className="mt-3 text-sm text-white">
+              <span className="text-yellow-400">Note:</span> Sebelum mulai bisa
+              cek aksara di page{" "}
+              <Link to="/aksara" className="text-yellow-300 underline">
+                ini
+              </Link>
+            </div>
+          </motion.div>
         )}
 
         {gameStatus === "waiting" && (
           <div className="text-center mb-8">
-            <button
+            <motion.button
               onClick={startGame}
-              className="px-8 py-4 bg-green-500/20 hover:bg-green-500/30 border border-green-400/30 rounded-lg text-green-300 text-xl font-bold transition-all duration-200 transform hover:scale-105"
+              className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-lg text-white text-xl font-bold shadow-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               Mulai Game
-            </button>
+            </motion.button>
           </div>
         )}
 
         {(gameStatus === "playing" || gameStatus === "finished") && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Batak Characters */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Huruf Latin */}
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-white mb-4 text-center">
+                <h2 className="text-xl font-semibold text-white mb-4 text-center bg-blue-500/20 py-2 rounded-lg">
+                  Huruf Latin
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {latinChars.map(({ latin }) => (
+                    <LatinCharacter
+                      key={latin}
+                      char={latin}
+                      isMatched={Object.values(matches).includes(latin)}
+                      disabled={gameStatus === "finished"}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Aksara Batak */}
+              <div className="space-y-4">
+                <h2 className="text-xl font-semibold text-white mb-4 text-center bg-purple-500/20 py-2 rounded-lg">
                   Aksara Batak
                 </h2>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {batakChars.map(({ batak }) => (
                     <BatakCharacter
                       key={batak}
@@ -234,143 +314,32 @@ const MatchingGame = () => {
                   ))}
                 </div>
               </div>
-
-              {/* Latin Characters */}
-              <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-white mb-4 text-center">
-                  Huruf Latin
-                </h2>
-                <div className="grid grid-cols-3 gap-4">
-                  {latinChars.map(({ latin }) => (
-                    <LatinCharacter
-                      key={latin}
-                      char={latin}
-                      isMatched={Object.values(matches).includes(latin)}
-                      disabled={gameStatus === "finished"}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="mt-8 flex justify-center gap-4">
-              <button
+              <motion.button
                 onClick={initGame}
-                className="px-6 py-3 bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-400/30 rounded-lg text-yellow-300 transition-all duration-200 transform hover:scale-105"
+                className="px-6 py-3 bg-yellow-500/80 hover:bg-yellow-500 rounded-lg text-white font-medium shadow-md"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Main Lagi
-              </button>
-              {/* {gameStatus === "finished" && (
-                <button
+              </motion.button>
+
+              {gameStatus === "finished" && (
+                <motion.button
                   onClick={startGame}
-                  className="px-6 py-3 bg-green-500/20 hover:bg-green-500/30 border border-green-400/30 rounded-lg text-green-300 transition-all duration-200 transform hover:scale-105"
+                  className="px-6 py-3 bg-green-500/80 hover:bg-green-500 rounded-lg text-white font-medium shadow-md"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Coba Lagi
-                </button>
-              )} */}
+                </motion.button>
+              )}
             </div>
-          </>
+          </motion.div>
         )}
-      </div>
-    </div>
-  );
-};
-
-interface BatakCharacterProps {
-  char: string;
-  matchedLatin?: string;
-  onDrop: (batak: string, latin: string) => void;
-  disabled: boolean;
-}
-
-const BatakCharacter = ({
-  char,
-  matchedLatin,
-  onDrop,
-  disabled,
-}: BatakCharacterProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [{ isDragging }, drag] = useDrag({
-    type: "BATAK",
-    item: { batak: char },
-    canDrag: !disabled,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
-
-  const [{ isOver }, drop] = useDrop({
-    accept: "LATIN",
-    drop: (item: { latin: string }) => onDrop(char, item.latin),
-    canDrop: () => !disabled,
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-  });
-
-  drag(drop(ref));
-
-  return (
-    <div
-      ref={ref}
-      className={`relative flex items-center justify-center h-20 w-full rounded-lg border-2 transition-all ${
-        matchedLatin
-          ? "border-green-500/50 bg-green-500/10"
-          : isOver
-          ? "border-yellow-500/50 bg-yellow-500/10"
-          : "border-white/20 bg-white/5"
-      } ${isDragging ? "opacity-50 scale-95" : "opacity-100 scale-100"} ${
-        disabled ? "cursor-not-allowed" : "cursor-move"
-      }`}
-    >
-      <div
-        className="text-4xl text-white text-center"
-        style={{ fontFamily: "Noto Sans Batak, serif" }}
-      >
-        {char}
-      </div>
-      {matchedLatin && (
-        <div className="absolute bottom-1 right-1 text-xs bg-green-500/50 rounded px-1 text-white">
-          {matchedLatin}
-        </div>
-      )}
-    </div>
-  );
-};
-
-interface LatinCharacterProps {
-  char: string;
-  isMatched: boolean;
-  disabled: boolean;
-}
-
-const LatinCharacter = ({ char, isMatched, disabled }: LatinCharacterProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [{ isDragging }, drag] = useDrag({
-    type: "LATIN",
-    item: { latin: char },
-    canDrag: !disabled,
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
-
-  drag(ref);
-
-  return (
-    <div
-      ref={ref}
-      className={`flex items-center justify-center h-20 w-full rounded-lg border-2 transition-all ${
-        isMatched
-          ? "border-green-500/50 bg-green-500/10"
-          : "border-white/20 bg-white/5"
-      } ${isDragging ? "opacity-50 scale-95" : "opacity-100 scale-100"} ${
-        disabled || isMatched ? "cursor-not-allowed" : "cursor-move"
-      }`}
-    >
-      <div className="text-4xl text-white text-center font-bold">{char}</div>
+      </motion.div>
     </div>
   );
 };
