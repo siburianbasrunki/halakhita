@@ -25,28 +25,15 @@ export const quizData = [
       "Aksara Batak Toba memiliki 19 induk aksara (ina ni surat) yang menjadi dasar pembentukan kata.",
   },
   {
-    question:
-      "Berikut ini yang termasuk anak aksara (pangolat) yang berfungsi mematikan vokal adalah...",
-    answers: [
-      { id: "1", text: "Ulu" },
-      { id: "2", text: "Haboruan" },
-      { id: "3", text: "Pangolat" },
-      { id: "4", text: "Taring" },
-    ],
-    correctAnswer: "3",
-    explanation:
-      "Pangolat adalah anak aksara yang digunakan untuk mematikan vokal pada induk aksara, mengubahnya menjadi konsonan murni.",
-  },
-  {
     question: "Bagaimana penulisan 'ba' dalam Aksara Batak Toba?",
     answers: [
-      { id: "1", text: "[Gambar aksara 'ba']" }, // Anda perlu menambahkan representasi visual atau deskripsi aksara di sini
-      { id: "2", text: "[Gambar aksara 'ka']" },
-      { id: "3", text: "[Gambar aksara 'da']" },
-      { id: "4", text: "[Gambar aksara 'ga']" },
+      { id: "1", text: "ᯅ" },
+      { id: "2", text: "ᯔ" },
+      { id: "3", text: "ᯂ" },
+      { id: "4", text: "ᯉ" },
     ],
     correctAnswer: "1",
-    explanation: "Aksara 'ba' memiliki bentuk khas seperti...", // Deskripsikan atau tunjukkan visual di sini
+    explanation: "Aksara 'ba' memiliki bentuk ᯅ ",
   },
   {
     question: "Kata 'Horas' dalam Bahasa Batak Toba berarti...",
@@ -85,18 +72,7 @@ export const quizData = [
     explanation:
       "'Aha Kabarmu?' atau 'Boasa ma damang?' adalah cara umum menanyakan kabar dalam Bahasa Batak Toba.",
   },
-  {
-    question: "Pangindua (vokal 'u') pada Aksara Batak Toba diletakkan di...",
-    answers: [
-      { id: "1", text: "Atas aksara induk" },
-      { id: "2", text: "Bawah aksara induk" },
-      { id: "3", text: "Samping kiri aksara induk" },
-      { id: "4", text: "Samping kanan aksara induk" },
-    ],
-    correctAnswer: "2",
-    explanation:
-      "Anak aksara 'u' atau 'Pangindua' diletakkan di bagian bawah aksara induk.",
-  },
+
   {
     question: "Apa arti kata 'Dali' dalam Bahasa Batak Toba?",
     answers: [
@@ -120,5 +96,16 @@ export const quizData = [
     correctAnswer: "1",
     explanation:
       "'Molo boi' berarti 'kalau bisa', dan 'ro ma ho' berarti 'datanglah kamu'.",
+  },
+  {
+    question: "Bagaimana penulisan kata Horas dalam Aksara Batak Toba?",
+    answers: [
+      { id: "1", text: "ᯘᯞᯔ᯲" },
+      { id: "2", text: "ᯂᯬᯒᯘ᯲" },
+      { id: "3", text: "ᯤᯅᯉ" },
+      { id: "4", text: "ᯖᯬᯅ" },
+    ],
+    correctAnswer: "2",
+    explanation: "Kata 'Horas' memiliki bentuk ᯂᯬᯒᯘ᯲ ",
   },
 ];
