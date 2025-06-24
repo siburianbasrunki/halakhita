@@ -339,7 +339,6 @@ const MatchingGame = () => {
             transition={{ duration: 0.5 }}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Huruf Latin */}
               <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-white mb-4 text-center bg-blue-500/20 py-2 rounded-lg">
                   Huruf Latin {isMobile && selectedLatin && "(Pilih Aksara)"}
@@ -359,7 +358,6 @@ const MatchingGame = () => {
                 </div>
               </div>
 
-              {/* Aksara Batak */}
               <div className="space-y-4">
                 <h2 className="text-xl font-semibold text-white mb-4 text-center bg-purple-500/20 py-2 rounded-lg">
                   Aksara Batak

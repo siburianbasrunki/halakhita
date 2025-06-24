@@ -9,7 +9,7 @@ const Converter = () => {
   const [copied, setCopied] = useState(false);
 
   const consonants: Record<string, string> = {
-    k: "ᯂ",
+    k: "ᯄ᯦",
     b: "ᯅ",
     p: "ᯇ",
     n: "ᯉ",
@@ -26,7 +26,7 @@ const Converter = () => {
     c: "ᯡ",
     h: "ᯂ",
     f: "ᯇ",
-    q: "ᯂ",
+    q: "ᯄ᯦",
     v: "ᯋ",
     x: "ᯘ",
     z: "ᯐ",
@@ -87,6 +87,7 @@ const Converter = () => {
         continue;
       }
 
+      // Handle special case for "nki"
       if (
         lowerChar === "k" &&
         i > 0 &&
@@ -99,6 +100,7 @@ const Converter = () => {
         continue;
       }
 
+      // Handle two-character consonants (ng, ny)
       if (i < text.length - 1) {
         const twoChar = text.substring(i, i + 2).toLowerCase();
         if (consonants[twoChar]) {
@@ -119,6 +121,7 @@ const Converter = () => {
         }
       }
 
+      // Handle single consonants
       if (isBaseConsonant(lowerChar)) {
         finalResult += consonants[lowerChar];
 
@@ -130,6 +133,7 @@ const Converter = () => {
             }
             i++;
           } else {
+            // Add virama if next character is consonant or end of word
             if (
               /[a-zA-Zé0-9]/.test(nextChar) ||
               i + 1 === text.length ||
@@ -148,6 +152,12 @@ const Converter = () => {
         const prevCharLower = i > 0 ? text[i - 1].toLowerCase() : "";
         const prevResultChar = finalResult.slice(-1);
 
+        // Check if this vowel should be standalone
+        // It's standalone if:
+        // 1. It's at the beginning of text
+        // 2. Previous character is not alphanumeric
+        // 3. Previous character had virama (᯲)
+        // 4. For 'a': if previous consonant already has its inherent 'a', this 'a' should be standalone
         if (
           i === 0 ||
           !/[a-zA-Zé0-9]/.test(prevCharLower) ||
@@ -155,8 +165,23 @@ const Converter = () => {
         ) {
           finalResult += standaloneVowels[lowerChar];
         } else if (lowerChar === "a") {
+          // This is the key fix: 'a' after a consonant that already has inherent 'a'
+          // should be treated as standalone
+          if (isBaseConsonant(prevCharLower) || 
+              (i >= 2 && consonants[text.substring(i-2, i).toLowerCase()])) {
+            finalResult += standaloneVowels[lowerChar];
+          }
+          // If previous was vowel, this 'a' is standalone
+          else if (isVowel(prevCharLower)) {
+            finalResult += standaloneVowels[lowerChar];
+          }
         } else {
-          finalResult += standaloneVowels[lowerChar];
+          // For other vowels (i, u, e, o), if previous was a vowel, make it standalone
+          if (isVowel(prevCharLower)) {
+            finalResult += standaloneVowels[lowerChar];
+          } else {
+            finalResult += standaloneVowels[lowerChar];
+          }
         }
         i++;
       } else {
@@ -232,7 +257,7 @@ const Converter = () => {
               <textarea
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder="Contoh: horas, basrunki"
+                placeholder="Contoh: horas, basrunki, siburian"
                 className="w-full h-40 bg-white/5 border border-white/20 rounded-xl p-4 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent resize-none text-lg"
               />
             </div>

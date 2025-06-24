@@ -97,6 +97,51 @@ export const AksaraView = () => {
           </p>
         </div>
 
+        <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-lg border border-yellow-400/30 rounded-2xl p-8 mb-12">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
+            Tentang Aksara Batak
+          </h2>
+          <div className="space-y-4 text-white/90">
+            <p>
+              Surat Batak, disebut juga sebagai{" "}
+              <span className="text-yellow-300">Surat na Sampulu Sia</span>{" "}
+              (kesembilan belas huruf), Si Sia-sia, atau Aksara Batak, adalah
+              salah satu aksara tradisional Indonesia yang berkembang di wilayah
+              masyarakat Batak, Sumatera Utara. Surat Batak terdiri dari
+              beberapa varian yang digunakan untuk menulis enam rumpun bahasa
+              Batak: Batak Angkola, Batak Karo, Batak Mandailing, Batak Pakpak,
+              Batak Simalungun, dan Batak Toba.
+            </p>
+            <p>
+              Aksara ini merupakan turunan dari aksara Brahmi India melalui
+              perantara aksara Kawi. Surat Batak aktif digunakan oleh masyarakat
+              Batak setidaknya sejak abad ke-18 hingga penggunaannya
+              berangsur-angsur memudar pada abad ke-20. Aksara ini masih
+              diajarkan di Sumatera Utara sebagai bagian dari muatan lokal,
+              tetapi dengan penerapan yang terbatas dalam kehidupan sehari-hari.
+            </p>
+            <p>
+              Surat Batak adalah sistem tulisan abugida yang terdiri dari 19
+              aksara dasar dengan tambahan beberapa aksara pada varian tertentu.
+              Seperti aksara Brahmi lainnya, setiap konsonan merepresentasikan
+              satu suku kata dengan vokal inheren /a/ yang dapat diubah dengan
+              pemberian diakritik tertentu. Surat Batak dibaca dari kiri ke
+              kanan. Secara tradisional, aksara ini ditulis tanpa spasi
+              antarkata (scriptio continua) dengan tanda baca yang minimal.
+            </p>
+            <p className="pt-4 text-white/70 italic text-sm">
+              Sumber:{" "}
+              <a
+                href="https://id.wikipedia.org/wiki/Surat_Batak"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow-300 hover:underline"
+              >
+                Wikipedia - Surat Batak
+              </a>
+            </p>
+          </div>
+        </div>
         <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8">
           <h2 className="text-2xl font-bold text-yellow-400 mb-6">
             Aksara Dasar (Induk)
@@ -145,7 +190,7 @@ export const AksaraView = () => {
           </div>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-8">
+        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 mb-[80px]">
           <h2 className="text-2xl font-bold text-yellow-400 mb-6">
             Contoh Kalimat
           </h2>
@@ -179,27 +224,6 @@ export const AksaraView = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Penjelasan Sistem Aksara */}
-        <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur-lg border border-yellow-400/30 rounded-2xl p-8 mb-[80px]">
-          <h2 className="text-2xl font-bold text-yellow-400 mb-4">
-            Tentang Aksara Batak
-          </h2>
-          <div className="space-y-4 text-white/90">
-            <p>
-              Surat Batak, disebut juga sebagai <span className="text-yellow-300">Surat na Sampulu Sia</span> (kesembilan belas huruf), Si Sia-sia, atau Aksara Batak, adalah salah satu aksara tradisional Indonesia yang berkembang di wilayah masyarakat Batak, Sumatera Utara. Surat Batak terdiri dari beberapa varian yang digunakan untuk menulis enam rumpun bahasa Batak: Batak Angkola, Batak Karo, Batak Mandailing, Batak Pakpak, Batak Simalungun, dan Batak Toba.
-            </p>
-            <p>
-              Aksara ini merupakan turunan dari aksara Brahmi India melalui perantara aksara Kawi. Surat Batak aktif digunakan oleh masyarakat Batak setidaknya sejak abad ke-18 hingga penggunaannya berangsur-angsur memudar pada abad ke-20. Aksara ini masih diajarkan di Sumatera Utara sebagai bagian dari muatan lokal, tetapi dengan penerapan yang terbatas dalam kehidupan sehari-hari.
-            </p>
-            <p>
-              Surat Batak adalah sistem tulisan abugida yang terdiri dari 19 aksara dasar dengan tambahan beberapa aksara pada varian tertentu. Seperti aksara Brahmi lainnya, setiap konsonan merepresentasikan satu suku kata dengan vokal inheren /a/ yang dapat diubah dengan pemberian diakritik tertentu. Surat Batak dibaca dari kiri ke kanan. Secara tradisional, aksara ini ditulis tanpa spasi antarkata (scriptio continua) dengan tanda baca yang minimal.
-            </p>
-            <p className="pt-4 text-white/70 italic text-sm">
-              Sumber: <a href="https://id.wikipedia.org/wiki/Surat_Batak" target="_blank" rel="noopener noreferrer" className="text-yellow-300 hover:underline">Wikipedia - Surat Batak</a>
-            </p>
           </div>
         </div>
       </div>
